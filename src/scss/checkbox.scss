@@ -1,0 +1,155 @@
+.b-contain input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+
+.b-contain {
+  display: table;
+  position: relative;
+  padding-left: 3rem;
+  cursor: pointer;
+  margin-bottom: .1rem;
+
+  span {
+    line-height: 1;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+
+
+  input[type="checkbox"] ~ .b-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.85rem;
+    width: 1.85rem;
+    background: rgba(255, 255, 255, 1);
+    transition: background 250ms;
+    border: 2px solid rgba(43, 175, 170, 1);
+    border-radius: 0.34rem;
+  }
+
+  input[type="checkbox"] ~ .b-input::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 25%;
+    top: 44%;
+    width: 0.55rem;
+    height: 1rem;
+    border: solid rgb(255, 255, 255);
+    border-width: 0 3px 3px 0;
+    transition: background 250ms;
+    transform: rotate(45deg) translate(-50%, -50%);
+  }
+
+  input:disabled ~ .b-input::after {
+    border-color: rgba(0, 0, 0, 1);
+  }
+
+  input:checked ~ .b-input::after {
+    display: block;
+  }
+
+  &:hover input ~ .b-input,
+  & input:focus ~ .b-input {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  input:focus ~ .b-input {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.02);
+  }
+
+  input:checked ~ .b-input {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(43, 175, 170, 1);
+  }
+
+  input[type="checkbox"]:disabled ~ .b-input {
+    background: rgba(241, 245, 248, 1);
+    border-color: rgba(184, 194, 204, 1);
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  input:checked ~ .b-input, .b-contain:hover input:not([disabled]):checked ~ .b-input {
+    background: rgba(43, 175, 170, 1);
+    border-color: rgba(37, 154, 150, 1);
+  }
+
+  .b-input::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    margin-left: -12px;
+    margin-top: -12px;
+    background: rgba(43, 175, 170, 1);
+    border-radius: 2.3rem;
+    opacity: 0.4;
+    z-index: 99999;
+    transform: scale(0);
+  }
+
+
+  input + .b-input::before {
+    animation: b-ripple 250ms ease-out;
+  }
+
+  input:checked + .b-input::before {
+    animation-name: b-ripple-duplicate;
+  }
+
+  .b-input::before {
+    visibility: hidden;
+  }
+
+  input:focus + .b-input::before {
+    visibility: visible;
+  }
+
+  &:first-child .b-input::before {
+    visibility: hidden;
+  }
+}
+
+
+@keyframes b-ripple {
+  0% {
+    transform: scale(0);
+  }
+
+  20% {
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes b-ripple-duplicate {
+  0% {
+    transform: scale(0);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+

@@ -1,0 +1,30 @@
+@import 'variables';
+
+@mixin plus($width, $weight, $color) {
+  margin: auto;
+  background-color: $color;
+  height: $width;
+  width: $weight;
+  position: relative;
+
+  &:after {
+    content: "";
+    background-color: $color;
+    position: absolute;
+    height: $weight;
+    width: $width;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin panel($padding) {
+  box-shadow: 0 12px 35px 10px rgba(34, 60, 80, 0.1);
+  background-color: $light-theme-panel;
+  border-radius: $border-radius-panel;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 35px;
+  padding: $padding;
+}

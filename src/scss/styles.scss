@@ -1,0 +1,739 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+// font-family: 'Nunito', sans-serif;
+
+@import 'variables';
+@import 'mixins';
+@import 'checkbox';
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+}
+
+input {
+  outline: none;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  border: 0;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: $light-theme-bg;
+  color: $main-font-color;
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+
+// title
+
+.panel__title {
+  font-size: $fs-title-panel;
+  font-weight: 700;
+  color: $main-color;
+}
+
+// Nav
+
+.panel-nav {
+  background-color: #fff;
+  height: 100%;
+  width: 17%;
+  display: flex;
+  flex-direction: column;
+  padding: 35px 0 35px 35px;
+  box-shadow: 15px -1px 50px -6px rgba(34, 60, 80, 0.1);
+
+
+  &__header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  &__logo {
+    width: 30%;
+    height: auto;
+
+    & img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__name {
+    font-size: 33px;
+    font-weight: 700;
+    line-height: 110%;
+    margin-left: 15px;
+    color: $main-color;
+  }
+
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+
+  &__title {
+    color: $main-color;
+    font-size: 35px;
+    font-weight: 700;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+  }
+
+  &__item {
+    height: 50px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    color: $main-font-color;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.active {
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 55px;
+        height: 70%;
+        border-radius: 25px 0 0 25px;
+        background-color: $main-color;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+
+    &-logo {
+      width: 28px;
+      margin-right: 15px;
+    }
+
+    &-name {
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+
+  &__add {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+
+    &-logo {
+      margin-right: 15px;
+      border: 3px solid $main-color;
+      width: 32px;
+      height: 32px;
+      display: flex;
+
+      & div {
+        @include plus(16px, 4px, $main-color);
+      }
+    }
+
+    &-button {
+      color: $main-color;
+      background: none;
+      font-size: 30px;
+      cursor: pointer;
+      border: none;
+    }
+  }
+
+}
+
+// panel tasks
+
+.panel-tasks {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0 0 50px;
+
+  &__add-task {
+    cursor: pointer;
+    width: 35%;
+    height: 60px;
+    background-color: $main-color;
+    border-radius: 12px;
+    color: $light-theme-panel;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & .plus {
+      border: 3px solid $light-theme-panel;
+      width: 30px;
+      height: 30px;
+      margin: 0 15px 0 25px;
+      display: flex;
+      border-radius: 50%;
+
+      & div {
+        @include plus(12px, 3px, $light-theme-panel);
+      }
+    }
+
+    & span {
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+  }
+
+  &__statistics {
+    width: 100%;
+    margin-top: 50px;
+    height: 290px;
+    @include panel(30px 35px);
+  }
+}
+
+.tasks-statistics {
+
+  &__title {
+    font-size: $fs-title-panel;
+    font-weight: 700;
+    color: $main-color;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 25px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+
+    &-name {
+      text-align: center;
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    &-value {
+      display: flex;
+      flex-direction: column;
+      margin: 15px auto 0;
+      width: 130px;
+      height: 130px;
+      border: 2px solid $main-color;
+      border-radius: 50%;
+    }
+
+    &-data {
+      margin: auto;
+    }
+
+    &-count {
+      font-weight: 700;
+      color: $main-color;
+      font-size: 40px;
+      text-align: center;
+    }
+
+    &-subtitle {
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+}
+
+// tasks
+
+.tasks {
+  @include panel(30px 35px);
+  margin-top: 35px;
+
+  &__active {
+    display: flex;
+    flex-direction: column;
+
+    &-title {
+      color: $main-color;
+      font-size: $fs-title-panel;
+      font-weight: 700;
+    }
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    padding: 15px;
+    border-radius: 15px;
+    border: 3px solid $task-border-color;
+    background-color: #fff;
+    margin-bottom: 30px;
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    &:hover &-change,
+    &:hover &-delete {
+      opacity: 1;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: $task-bg-hover-color;
+    }
+
+    &-state span {
+      font-size: 25px;
+      font-weight: 600;
+    }
+
+    &-change,
+    &-delete {
+      opacity: 0;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0);
+      transition: transform .1s linear, opacity .1s linear;
+
+
+      &:hover {
+        transform: scale(1.15);
+      }
+
+      & img {
+        height: auto;
+        width: 100%;
+      }
+    }
+
+
+  }
+
+  &__inactive {
+    margin-top: 30px;
+
+
+    span {
+      text-decoration: line-through;
+    }
+  }
+
+}
+
+
+// addition
+
+.addition {
+  width: 35.5%;
+  margin: 150px 0 0 40px;
+}
+
+.time-info__panel {
+  @include panel(30px 35px);
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.time__title,
+.date__title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.time-info__data {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+
+  & .time,
+  & .date {
+    width: 50%;
+  }
+
+}
+
+.time__data,
+.date__data {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.date__data-icon,
+.time__data-icon {
+  height: auto;
+  width: 40px;
+  margin-right: 15px;
+}
+
+.date__data-value,
+.time__data-value {
+  font-size: 35px;
+  font-weight: 700;
+}
+
+// observation
+
+.observation-panel {
+  @include panel(30px 35px);
+  margin-top: 40px;
+  height: 190px;
+  width: 100%;
+}
+
+.observation {
+  margin-top: 20px;
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    margin-bottom: 10px;
+    font-size: 23px;
+
+    span {
+      font-weight: 700;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+// facts
+
+.facts__panel {
+  @include panel(30px 35px);
+  width: 100%;
+  height: 250px;
+  margin-top: 40px;
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+
+  &__text {
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 600;
+  }
+}
+
+
+// panel
+
+.panel {
+  @include panel(30px 35px);
+}
+
+
+@media screen and (max-width: 1600px) {
+
+  .panel-nav {
+    &__logo img {
+      width: 90%;
+    }
+
+    &__name {
+      font-size: 25px;
+      margin-left: 3px;
+    }
+  }
+
+
+  .nav {
+    margin-top: 30px;
+
+    &__title {
+      font-size: 29px;
+    }
+
+    &__item {
+
+      height: 35px;
+      margin-bottom: 25px;
+
+      &.active:before {
+        width: 50px;
+        height: 70%;
+      }
+
+      &-name {
+        font-size: 24px;
+      }
+
+      &-logo {
+        width: 24px;
+        margin-right: 15px;
+      }
+    }
+
+    &__add-logo {
+      margin-right: 10px;
+      border: 2px solid #2bafaa;
+      width: 27px;
+      height: 27px;
+      display: flex;
+    }
+
+    .nav__add-logo div {
+      @include plus(14px, 2px, $main-color)
+    }
+
+    &__add-button {
+      font-size: 24px;
+    }
+  }
+
+  .panel-tasks__add-task {
+    cursor: pointer;
+    width: 30%;
+    height: 45px;
+    min-height: 45px;
+
+    .plus {
+      border: 3px solid #ffffff;
+      width: 27px;
+      height: 27px;
+      margin: 0 8px 0 15px;
+    }
+  }
+
+
+  .panel-tasks__add-task span {
+    font-size: 17px;
+    letter-spacing: 1px;
+  }
+
+
+  .panel-tasks {
+    margin: 30px 0 0 35px;
+  }
+
+
+  .panel {
+    @include panel(25px 30px);
+  }
+
+  .panel-tasks__statistics {
+    width: 100%;
+    margin-top: 30px;
+    height: 215px;
+  }
+
+
+  .tasks-statistics__item {
+    width: 25%;
+
+    &-name {
+      font-size: 18px;
+    }
+
+    &-subtitle {
+      font-size: 16px;
+    }
+
+
+    &-value {
+      width: 90px;
+      height: 90px;
+    }
+
+    &-count {
+      color: #2bafaa;
+      font-size: 27px;
+    }
+  }
+
+
+  .tasks-statistics__items {
+    margin-top: 10px;
+  }
+
+
+  .panel__title {
+    font-size: 22px;
+  }
+
+  .tasks {
+    margin-top: 25px;
+
+    &__items {
+      margin-top: 20px;
+    }
+
+    &__item {
+      padding: 15px;
+      height: 50px;
+      margin-bottom: 15px;
+
+      .tasks__item-change,
+      .tasks__item-delete {
+        width: 32px;
+        height: 32px;
+      }
+
+      &-state span {
+        font-size: 17px;
+      }
+
+      .b-contain {
+
+        padding-left: 2.5rem;
+
+        & input[type="checkbox"] ~ .b-input {
+          height: 1.35rem;
+          width: 1.35rem;
+        }
+
+        & input[type="checkbox"] ~ .b-input::after {
+          left: 24%;
+          top: 44%;
+          width: 0.47rem;
+          height: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .addition {
+    width: 36%;
+    margin: 107px 0 0 30px;
+
+    .time-info__panel {
+      height: 175px;
+    }
+
+    .time__title,
+    .date__title {
+      font-size: 20px;
+    }
+
+    .date__data-value,
+    .time__data-value {
+      font-size: 25px;
+    }
+
+    .date__data-icon,
+    .time__data-icon {
+      width: 30px;
+      margin-right: 15px;
+    }
+
+    .observation {
+      margin-top: 10px;
+
+      &__item {
+        margin-bottom: 10px;
+        font-size: 19px;
+      }
+
+      &-panel {
+        margin-top: 30px;
+        height: 155px;
+      }
+    }
+  }
+
+  .facts {
+    &__panel {
+      height: auto;
+      max-height: 200px;
+      margin-top: 30px;
+    }
+
+    &__text {
+      margin-top: 10px;
+      font-size: 20px;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
