@@ -46,15 +46,18 @@ body {
   color: $main-font-color;
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 
 #root {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  overflow: hidden;
+  position: relative;
+  padding-bottom: 50px;
 }
 
 
@@ -70,12 +73,14 @@ body {
 
 .panel-nav {
   background-color: #fff;
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   width: 17%;
   display: flex;
   flex-direction: column;
   padding: 35px 0 35px 35px;
   box-shadow: 15px -1px 50px -6px rgba(34, 60, 80, 0.1);
+  border-bottom-right-radius: 30px;
 
 
   &__header {
@@ -130,6 +135,7 @@ body {
     align-items: center;
     color: $main-font-color;
 
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -154,6 +160,12 @@ body {
     &-logo {
       width: 28px;
       margin-right: 15px;
+
+      & div {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+      }
     }
 
     &-name {
@@ -313,7 +325,6 @@ body {
   &__items {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 30px;
   }
 
@@ -351,6 +362,12 @@ body {
     &-state span {
       font-size: 25px;
       font-weight: 600;
+    }
+
+    &-clear {
+      color: #7c7c7c;
+      font-weight: 700;
+      font-size: 20px;
     }
 
     &-change,
@@ -439,7 +456,7 @@ body {
 
 .date__data-value,
 .time__data-value {
-  font-size: 35px;
+  font-size: 32px;
   font-weight: 700;
 }
 
@@ -496,6 +513,285 @@ body {
 }
 
 
+// New Task
+
+
+.panel__add-task {
+  @include panel(10px 40px);
+  box-shadow: 0 0 30px 7px rgba(34, 60, 80, 0.4);
+  width: 40%;
+  height: 460px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 1px rgba(10, 9, 9, .3);
+
+  .add-task {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .add-task__close {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        transition: transform linear .1s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        .add-task__icon {
+          height: auto;
+          width: 100%;
+        }
+      }
+
+      .add-task__title {
+        font-size: 30px;
+        color: $main-font-color;
+      }
+    }
+
+    &__input {
+
+      &:focus {
+        outline: none;
+      }
+
+      resize: none;
+      width: 100%;
+      height: 120px;
+      border-radius: 20px;
+      background-color: #e5e5e7;
+      border: none;
+      color: $main-font-color;
+      padding: 15px;
+      font-size: 20px;
+
+      &::-webkit-input-placeholder {
+        text-align: left;
+      }
+    }
+
+
+    &__categories {
+      display: flex;
+      flex-direction: column;
+
+      .categories {
+        &__title {
+          font-size: 24px;
+          color: $main-color;
+          font-weight: 700;
+          margin: 15px 0 0 15px;
+        }
+
+        &__items {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          margin-top: 10px;
+
+
+          .category {
+            cursor: pointer;
+            width: auto;
+            min-width: 90px;
+            max-width: 200px;
+            padding: 10px;
+            height: 40px;
+            background-color: #e5e5e7;
+            border-radius: 15px;
+            display: flex;
+            margin: 6px;
+            transition: background-color linear .1s;
+
+            &:hover {
+              background-color: darken(#e5e5e7, 5);
+            }
+
+            &.selected {
+              background-color: $main-color;
+              color: #fff;
+            }
+
+            span {
+              margin: auto;
+            }
+          }
+        }
+      }
+    }
+
+    &__button {
+      width: 140px;
+      height: 40px;
+      border-radius: 20px;
+      background-color: $main-color;
+      color: #fff;
+      font-size: 20px;
+      text-align: center;
+      margin: 20px auto 0;
+      display: flex;
+      cursor: pointer;
+      transition: background-color linear .1s;
+
+      &:hover {
+        background-color: darken($main-color, 5);
+      }
+
+      & span {
+        margin: auto;
+      }
+    }
+  }
+}
+
+
+.blur {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(10px);
+}
+
+// add category
+
+.add-category {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 15px;
+  border: 2px solid $main-color;
+
+  &__input {
+    resize: none;
+    width: 90%;
+    height: 40px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 3px solid $main-color;
+    outline: none;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+  }
+
+  &__button {
+
+    &-accept,
+    &-close {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      transition: background-color linear .1s;
+      cursor: pointer;
+    }
+
+    &-accept {
+      background-color: $main-color;
+      margin-right: 10px;
+
+      &:hover {
+        background-color: darken($main-color, 5);
+      }
+
+      div {
+        width: 60%;
+        height: 3px;
+      }
+
+      &:before {
+        content: '';
+        height: 60%;
+        width: 3px;
+      }
+
+      div,
+      &:before {
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &-close {
+      background-color: #ea5b5b;
+
+      &:hover {
+        background-color: darken(#ea5b5b, 5);
+      }
+
+      & div {
+        position: absolute;
+        background-color: #fff;
+        width: 60%;
+        height: 3px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__colors {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+
+    & .colors {
+
+      &__title {
+        color: $main-font-color;
+        font-size: 20px;
+      }
+
+      &__items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+
+
+      &__item {
+        cursor: pointer;
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        margin: 0 12px 10px 0;
+
+        &:hover {
+          filter: brightness(85%);
+        }
+
+        &.selected {
+          border: 2px solid $main-font-color;
+        }
+      }
+    }
+  }
+
+}
+
+
 // panel
 
 .panel {
@@ -506,28 +802,35 @@ body {
 @media screen and (max-width: 1600px) {
 
   .panel-nav {
-    &__logo img {
-      width: 90%;
+    padding: 30px 0 30px 30px;
+
+    &__logo {
+      width: 50px;
+      height: 50px;
+
+      & img {
+        width: 100%;
+      }
     }
 
     &__name {
-      font-size: 25px;
-      margin-left: 3px;
+      font-size: 20px;
+      margin-left: 12px;
     }
   }
 
 
   .nav {
-    margin-top: 30px;
+    margin-top: 25px;
 
     &__title {
-      font-size: 29px;
+      font-size: 26px;
     }
 
     &__item {
 
-      height: 35px;
-      margin-bottom: 25px;
+      height: 32px;
+      margin-bottom: 20px;
 
       &.active:before {
         width: 50px;
@@ -535,7 +838,7 @@ body {
       }
 
       &-name {
-        font-size: 24px;
+        font-size: 21px;
       }
 
       &-logo {
@@ -594,7 +897,7 @@ body {
   .panel-tasks__statistics {
     width: 100%;
     margin-top: 30px;
-    height: 215px;
+    height: 225px;
   }
 
 
@@ -642,6 +945,7 @@ body {
       padding: 15px;
       height: 50px;
       margin-bottom: 15px;
+
 
       .tasks__item-change,
       .tasks__item-delete {
@@ -725,8 +1029,6 @@ body {
   }
 
 }
-
-
 
 
 
