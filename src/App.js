@@ -1,29 +1,40 @@
-import React, {useState} from 'react'
-import {ButtonAddTask, Navigation, PanelFacts, PanelObservation, PanelTasks, PanelTime, PanelStatistic, PanelNewTask} from "./components"
-
+// TODO: с 17 версии не нужно импортить React, кроме файла index.tsx
+import React, { useState } from 'react';
+import {
+  ButtonAddTask,
+  Navigation,
+  PanelFacts,
+  PanelObservation,
+  PanelTasks,
+  PanelTime,
+  PanelStatistic,
+  PanelNewTask,
+} from './components';
 
 function App() {
-    const [visibilityTask, changeVisibilityTask] = useState(false)
+  const [visibilityTask, changeVisibilityTask] = useState(false);
 
-    return (
-        <>
-            <Navigation/>
+  return (
+    <>
+      <Navigation />
 
-            <section className="panel-tasks">
-                <ButtonAddTask changeVisibilityTask={changeVisibilityTask}/>
-                <PanelStatistic/>
-                <PanelTasks/>
-            </section>
+      <section className="panel-tasks">
+        <ButtonAddTask changeVisibilityTask={changeVisibilityTask} />
+        <PanelStatistic />
+        <PanelTasks />
+      </section>
 
-            <section className="addition">
-                <PanelTime/>
-                <PanelObservation/>
-                <PanelFacts/>
-            </section>
+      <section className="addition">
+        <PanelTime />
+        <PanelObservation />
+        <PanelFacts />
+      </section>
 
-            {visibilityTask && <PanelNewTask changeVisibilityTask={changeVisibilityTask}/>}
-        </>
-    )
+      {visibilityTask && (
+        <PanelNewTask changeVisibilityTask={changeVisibilityTask} />
+      )}
+    </>
+  );
 }
 
-export default App
+export default App;
